@@ -19,7 +19,7 @@ def solution(string):
                 counter = 1
         answer = min(answer, let(ret))
         
-    return min(answer, len(string)
+    return min(answer, len(string))
 
 
 문자열을 분할할 단위 만들기 > for 문으로 만듦 / 최대 절편 길이는 문자열 길이의 절반 이하 (중복 방지)
