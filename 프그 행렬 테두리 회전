@@ -9,31 +9,34 @@ def solution(rows, columns, queries):
             t += 1
 //0으로만 이루어진 행렬 생성
 
-    for x1,y1,x2,y2 in queries:
-        tmp = array[x1-1][y1-1]
-        mini = tmp
+    for x1,y1,x2,y2 in queries: //입력받은 [x1, x2, y1, y2]를 보고 반복 실행
+        tmp = array[x1-1][y1-1] //<<이 값이 밑에서 말하는 그 반복되어서 없어지는 숫자 부분
+        mini = tmp //여기에 미리 저장
 
-        for k in range(x1-1,x2-1):
+        for k in range(x1-1,x2-1): //왼쪽 세로 먼저 아래에서 위로 값 옮기기
             test = array[k+1][y1-1]
             array[k][y1-1] = test
-            mini = min(mini, test)
+            mini = min(mini, test) //대신 맨 아래 숫자는 고정해둠
 
-        for k in range(y1-1,y2-1):
+        for k in range(y1-1,y2-1): //아래 가로 오른쪽에서 왼쪽으로 값 옮기기
             test = array[x2-1][k+1]
             array[x2-1][k] = test
             mini = min(mini, test)
 
-        for k in range(x2-1,x1-1,-1):
+        for k in range(x2-1,x1-1,-1): //오른쪽 세로 위에서 아래로 값 옮기기
             test = array[k-1][y2-1]
             array[k][y2-1] = test
             mini = min(mini, test)
 
-        for k in range(y2-1,y1-1,-1):
+        for k in range(y2-1,y1-1,-1): //위 가로 왼쪽에서 오른쪽으로 값 옮기기
             test = array[x1-1][k-1]
             array[x1-1][k] = test
             mini = min(mini, test)
+            
+//여기까지 하면 왼쪽 위 꼭짓점의 숫자가 반복됨 (이미 한칸 옮겨진 숫자가 옮겨지기 때문에)
+//그래서 기존 행렬에서 해당하는 값을 따로 저장했다가 그 위치에 입력해줌
 
         array[x1-1][y1] = tmp
-        answer.append(mini)
+        answer.append(mini) //마지막에 반복되는 칸 수정해주고 출력
 
     return answer
