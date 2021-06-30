@@ -7,6 +7,7 @@ def solution(rows, columns, queries):
         for col in range(columns):
             array[row][col] = t
             t += 1
+//0으로만 이루어진 행렬 생성
 
     for x1,y1,x2,y2 in queries:
         tmp = array[x1-1][y1-1]
