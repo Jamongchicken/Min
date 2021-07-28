@@ -1,14 +1,15 @@
 def solution(s): 
-  s_split = s.split(" ") 
+  s_split = s.split(" ") #이거 보니까 그냥 인덱스 붙여서 해결 볼랬더니 오류 남.
+                         #알고 보니 공백 제외하고 해야해서 여기서 공백 다 짤라줌.
   
-  for k in range(len(s_split)): 
-    s_list = list(s_split[k]) 
-    for i in range(len(s_list)): 
-      if i % 2 == 0: 
+  for k in range(len(s_split)): #문자열 글자 횟수만큼 반복 ㄱㄱ
+    s_list = list(s_split[k]) #위에서 공백 제외한 문자열 글자 뚝뚝 잘 라 줌
+    for i in range(len(s_list)): #문자열 글자 횟수만큼~
+      if i % 2 == 0: #짝수? 대문자로 ㄱ
         s_list[i] = s_list[i].upper() 
-      elif i % 2 == 1: 
+      elif i % 2 == 1: #홀수? 소문자로 ㄱ
         s_list[i] = s_list[i].lower()
-    s_split[k] = "".join(s_list)
+    s_split[k] = "".join(s_list)#다 뭉쳐
     
-answer = " ".join(s_split)
+answer = " ".join(s_split)#공백도 다시 뭉쳐
 return answer
