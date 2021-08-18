@@ -1,17 +1,28 @@
-def solution(n, times):
+# 이분 탐색 / 분할 정복법 사용해서 푸는 문제
+# 최적 값을 찾을 때 변하는 값을 시간으로 변하는 값이 변하게 하는 요인을
+# 어느 심사대에서 몇 명의 사람이 심사를 받는지로 생각해서 코드를 작성했음.
+# 주어진 심사대, 주어진 인원수에서 가장 오래 걸리는 시간 = max
+# 현재 탐색하는 시간 = mid
+# mid 동안 심사가 가능한지 확인 -> 더 많은 인원 심사 가능하면 현재 탐색 시간보다 아래에서
+# -> 심사해야하는 인원수보다 mid가 짧으면 위에서 찾는다.
+# 예시 심사대 [7, 10]이고 6명이면 (7*4) (10*2)가 최적 시간 28분(20분)
+# (7*6) // (7*5)(10*1) // (7*4)(10*2) // (7*3)(10*3) // (7*2)(10*4) // (7*1)(10*5) // (10*6)
+
+
+def solution(n, times): # [7, 10] 6명
     answer = 0
-    left = 1
-    right = max(times) *n
+    left = 1     # 최종 답을 넣을 변수
+    right = max(times) *n   # 제일 긴 시간 60분
     
     while left < right:
-        mid = (left + right) // 2
+        mid = (left + right) // 2 # 실제 말고 일단 반토막으로 중간값 넣어버리기 (61 // 2 -> 30)
         total = 0
         
-        for t in times:
-            total += mid // t
-        if total >= n:
+        for t in times:             # times = [7, 10]이니까 7~10 동안 반복
+            total += mid // t       # 계산 상의 중간값을 7(8, 9)로 나누고 이를 total에 넣기 (30 // 7 -> 4)
+        if total >= n:              # total이 전체 인원보다 많으면 right에 지금의 중간값을 넣고
             right = mid
-        else:
-            left = mid + 1
+        else:                       # total이 전체 인원보다 적으면 left에 지금의 중간값을 넣으면서
+            left = mid + 1          # left >= right가 되는 최초의 mid값을 찾기 (left = mid + 1 // left = 31)
     answer = left
     return answer
